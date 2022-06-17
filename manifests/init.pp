@@ -10,6 +10,7 @@ class websitelite(
   $blessed          = true, # "blessed" hosts may issue LE certs
   $saml_vhosts      = undef,
   $status           = false,
+  $monitoring       = true,
 ) {
   include ::apache
   include ::letsencrypt
@@ -27,8 +28,9 @@ class websitelite(
   if ( 'security' in $apache_mods ) {
     include ::websitelite::waf
   }
-
-  include ::websitelite::monitoring
+  if $monitoring {
+    include ::websitelite::monitoring
+  }
   if $status {
     include ::websitelite::status
   }
