@@ -1,0 +1,68 @@
+letsencrypt::suppress_cron_output: true
+letsencrypt::manage_cron: true
+letsencrypt::key_size: 4096
+letsencrypt::email: 'cert-renewal@gurukuli.co.uk'
+letsencrypt::renew_post_hook_commands:
+  - 'apachectl reload'
+websitelite::certs:
+  "%{facts.fqdn}":
+    ensure: present
+
+websitelite::saml::defaults:
+  export_vars:
+    - name: 'uid'
+      required: true
+    - name: 'cn'
+      required: true
+    - name: 'mail'
+      required: true
+    - name: 'groups'
+      required: true
+
+websitelite::saml_vhosts: {}
+
+websitelite::http_vhosts:
+  "%{facts.fqdn}-http":
+    ensure: present
+
+websitelite::https_vhosts:
+  "%{facts.fqdn}-https":
+    ensure: present
+
+websitelite::letsencrypt::defaults:
+  plugin: webroot
+  webroot_paths:
+    - '/var/www/html'
+
+websitelite::http_vhosts::defaults:
+  suphp_engine: 'off'
+  docroot: '/var/www/html'
+  ssl: false
+  port: 80
+  options: "%{alias('default_options')}"
+  redirectmatch_status: 'permanent'
+  redirectmatch_regexp: '^(?!/\.well-known/).*'
+  redirectmatch_dest: 'https://%{facts.fqdn}$0'
+
+websitelite::https_vhosts::defaults:
+  port: 443
+  ssl: true
+  ssl_cipher: 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:RSA+AESGCM256:!aNULL:!MD5:!DSS'
+  ssl_honorcipherorder: 'On'
+  ssl_stapling: true
+  ssl_cert: "/etc/letsencrypt/live/%{facts.fqdn}/cert.pem"
+  ssl_chain: "/etc/letsencrypt/live/%{facts.fqdn}/chain.pem"
+  ssl_key: "/etc/letsencrypt/live/%{facts.fqdn}/privkey.pem"
+  ssl_protocol: 'TLSv1.2'
+  docroot: '/var/www/html'
+  override: "%{alias('default_override')}"
+  headers:
+    - 'always set Strict-Transport-Security max-age=31536000'
+    - 'always set X-Frame-Options "SAMEORIGIN"'
+    - 'edit Set-Cookie ^(.*)$ $1;Secure'
+    - 'always set X-Xss-Protection "1; mode=block"'
+    - "always set Content-Security-Policy \"default-src https: data: 'unsafe-inline' 'unsafe-eval'\""
+    - 'always set X-Content-Type-Options "nosniff"'
+    - 'always set Referrer-Policy strict-origin-when-cross-origin'
+
+
