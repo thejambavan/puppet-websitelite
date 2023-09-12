@@ -35,7 +35,6 @@ websitelite::letsencrypt::defaults:
     - '/var/www/html'
 
 websitelite::http_vhosts::defaults:
-  suphp_engine: 'off'
   docroot: '/var/www/html'
   ssl: false
   port: 80
