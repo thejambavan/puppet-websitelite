@@ -1,0 +1,84 @@
+{
+  "name": "thejambavan-websitelite",
+  "version": "0.1",
+  "author": "thejambavan",
+  "summary": "Apache, Letsencrypt, SAML, wrapper module",
+  "license": "Apache-2.0",
+  "source": "https://github.com/thejambavan/puppet-websitelite",
+  "project_page": "https://github.com/thejambavan/puppet-websitelite",
+  "issues_url": "https://github.com/thejambavan/puppet-websitelite/issues",
+  "tags": [
+    "websitelite",
+    "apache",
+    "certbot",
+    "saml"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "AlmaLinux",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Fedora",
+      "operatingsystemrelease": [
+        "36"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "20.04",
+        "22.04"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "11",
+        "12"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 7.0.0 < 9.0.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppet/letsencrypt",
+      "version_requirement": ">= 8.0.0 < 11.0.0"
+    },
+    {
+      "name": "puppetlabs/apache",
+      "version_requirement": ">= 8.0.0 < 12.0.0"
+    }
+  ]
+}
