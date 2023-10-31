@@ -1,9 +1,3 @@
-letsencrypt::suppress_cron_output: true
-letsencrypt::manage_cron: true
-letsencrypt::key_size: 4096
-letsencrypt::email: 'cert-renewal@gurukuli.co.uk'
-letsencrypt::renew_post_hook_commands:
-  - 'apachectl reload'
 websitelite::certs:
   "%{facts.fqdn}":
     ensure: present
@@ -64,4 +58,11 @@ websitelite::https_vhosts::defaults:
     - 'always set X-Content-Type-Options "nosniff"'
     - 'always set Referrer-Policy strict-origin-when-cross-origin'
 
-
+# Bolt throws a warning and then ignores these. Just put these values in normal heira:
+# example-host: Module 'websitelite': Value returned from data_hash function 'yaml_data', when using location '/home/sethp/git/bolt-personal/.modules/websitelite/data/common.yaml', must use keys qualified with the name of the module
+# letsencrypt::suppress_cron_output: true
+#letsencrypt::manage_cron: true
+#letsencrypt::key_size: 4096
+#letsencrypt::email: 'cert-renewal@gurukuli.co.uk'
+#letsencrypt::renew_post_hook_commands:
+#  - 'apachectl reload'
