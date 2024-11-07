@@ -65,4 +65,4 @@ websitelite::https_vhosts::defaults:
 #letsencrypt::key_size: 4096
 #letsencrypt::email: 'cert-renewal@gurukuli.co.uk'
 #letsencrypt::renew_post_hook_commands:
-#  - 'apachectl reload'
+#  - 'apachectl -k graceful'
