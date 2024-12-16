@@ -40,7 +40,7 @@ class websitelite(
         notify =>  Class['Apache::Service'],
       }
 
-      concat::fragment { "web_mod_00-${extra_mod}":
+      concat::fragment { "web_mod_00-${mod_name}":
         target  => "${apache::params::mod_dir}/${mod_name}.conf",
         order   => '01',
         content => inline_template("# Puppet generated Module configuration for ${mod_name}\n<% @content.keys.sort.each do |key| %>  <%= key %> <%= @content[key] %>\n<% end %>"),
