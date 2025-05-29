@@ -6,5 +6,7 @@ class websitelite::letsencrypt(
 
   require ::websitelite::http_vhosts
 
+  notify{"🔐 Issuing Certificates for: ${certs} 🔐":}
+
   create_resources(letsencrypt::certonly, $certs, $defaults)
 }
