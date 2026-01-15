@@ -40,7 +40,7 @@ websitelite::http_vhosts::defaults:
 websitelite::https_vhosts::defaults:
   port: 443
   ssl: true
-  ssl_cipher: 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:RSA+AESGCM256:!aNULL:!MD5:!DSS'
+  ssl_cipher: 'HIGH:!aNULL:!MD5:!DSS'
   ssl_honorcipherorder: 'On'
   ssl_stapling: true
   ssl_cert: "/etc/letsencrypt/live/%{facts.networking.fqdn}/cert.pem"
